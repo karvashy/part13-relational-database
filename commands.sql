@@ -5,5 +5,5 @@ CREATE TABLE blogs (
     author text,
     likes integer default 0 
 );
-insert into blogs (title, url, author) values ('On let vs const', 'google.com', 'Dan Abramov')
-insert into blogs (title, url, author) values ('Gaps in sequences in PostgreSQL', 'google.com', 'Laurenz Albe')
+insert into blogs (title, url, author) values ('On let vs const', 'google.com', 'Dan Abramov');
+insert into blogs (title, url, author) values ('Gaps in sequences in PostgreSQL', 'google.com', 'Laurenz Albe');
