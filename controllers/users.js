@@ -1,10 +1,36 @@
 const router = require('express').Router()
 const { tokenExtractor } = require('../utils/middlewares')
 
-const { User, Blog } = require('../models')
+const { User, Blog, ReadingList } = require('../models')
 
 router.get('/', async (req, res) => {
     const users = await User.findAll({include: {model: Blog}})
+    res.json(users)
+})
+
+router.get('/:id', async (req, res) => {
+    let where = {}
+    console.log('read status from query',req.query.read)
+    if(req.query.read === "true"){
+        where = {status: true}
+    }
+    else if(req.query.read === "false"){
+        where = {status: false}
+    }
+
+    const users = await User.findAll({include: {
+        model: Blog,
+        as: 'readings',
+        attributes: {
+            exclude: ['createdAt','updatedAt','userId']
+        },
+        through:{
+            attributes: ['status','id'],
+            where
+        },
+    },
+    },
+    )
     res.json(users)
 })
 

@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
                     [Op.substring]: req.query.search
                 }
             }
-        }
+       }
     }
         const blogs = await Blog.findAll({
             include: {
